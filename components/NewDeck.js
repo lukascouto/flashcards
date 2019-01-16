@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { View, Text, TextInput, StyleSheet, TouchableOpacity, AsyncStorage } from 'react-native'
 import { addDeck } from '../actions/decks'
 import { connect } from 'react-redux'
+import { generateID } from '../utils/helpers'
 
 class NewDeck extends Component {
   state = {
@@ -17,30 +18,32 @@ class NewDeck extends Component {
   handlePress = () => {
 
     const { title } = this.state
+    const id = generateID()
     
     this.props.dispatch(addDeck({
+      id,
       title,
       questions: []
     }))
-    
-
-    this.setState({ title: '' })
+    // Navega até a página principal passando o id do último cadastro
+    // O id é usado no filtro da Home para exibir apenas o último baralho
+    this.props.navigation.navigate('Home', { id })
   }
   render() {
     const { title } = this.state
     return (
       <View>
-        <Text style={styles.container}>Create New Deck</Text>
+        <Text style={styles.container}>Qual é o título do seu novo baralho?</Text>
         <TextInput
           value={title}
           onChangeText={this.handleTextChange}
-          placeholder="New"
+          placeholder="Título do baralho"
           style={styles.input}
         />
         <TouchableOpacity
           onPress={this.handlePress}
           style={styles.btn}>
-          <Text style={styles.btnText}>Create</Text>
+          <Text style={styles.btnText}>Criar</Text>
         </TouchableOpacity>
       </View>
     )

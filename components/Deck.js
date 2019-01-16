@@ -3,16 +3,14 @@ import {
   StyleSheet,
   Text,
   View,
-  FlatList,
 } from 'react-native'
 
 export default function Deck ({ title, questions }) {
-  console.log('Title: ', title)
   return (
     <View>
       <View style={styles.container}>
         <Text>{title}</Text>
-        <Text>{questions.length} cards</Text>
+        <Text>{questions.length} Cartas</Text>
       </View>
     </View>
   )

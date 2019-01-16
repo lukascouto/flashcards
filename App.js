@@ -24,7 +24,7 @@ const persistedReducer = persistReducer(persistConfig, reducer)
 
 class App extends Component {
   render() {
-    //AsyncStorage.clear()
+    AsyncStorage.clear()
     // Substitui o reducer pelo persistedReducer
     // persistStore e PersistGate do pacote redux-persist
     const store = createStore(persistedReducer, middleware)

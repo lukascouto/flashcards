@@ -14,26 +14,29 @@ class NewCard extends Component {
 
     // Recupera a pergunta e resposta do estado local
     // Recupera os dados da navegação
-    // e recupera o ID do baralho que irá receber a nova carta
+    // e extrai o ID do baralho que irá receber a nova carta
     const { question, answer } = this.state
     const { navigation } = this.props
     const deckID = navigation.getParam('id')
     //const id = generateID()
 
     this.props.dispatch(addCard(deckID, { question, answer }))
+    this.props.navigation.goBack()
   }
   render() {
     return (
-      <View>
-        <Text style={styles.container}>Crie uma pergunta e uma resposta para a sua nova carta</Text>
+      <View style={styles.container}>
+        <Text style={styles.title}>Crie uma pergunta e uma resposta para a sua nova carta</Text>
         <TextInput
           onChangeText={(question) => this.setState({ question })}
-          placeholder="Crie uma pergunta"
+          placeholder="Pergunta..."
+          placeholderTextColor="#5E5A5A" 
           style={styles.input}
         />
         <TextInput
           onChangeText={(answer) => this.setState({ answer })}
-          placeholder="Crie uma resposta"
+          placeholder="Resposta..."
+          placeholderTextColor="#5E5A5A" 
           style={styles.input}
         />
         <TouchableOpacity
@@ -46,30 +49,41 @@ class NewCard extends Component {
   }
 }
 
+export default connect()(NewCard)
+
 const styles = StyleSheet.create({
   container: {
-    marginTop: 20
+    flex: 1,
+    padding: 20,
+    backgroundColor: '#111111',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  title: {
+    fontSize: 45,
+    color: '#5E5A5A'
   },
   input: {
     height: 44,
+    width: '100%',
     padding: 8,
     borderWidth: 1,
-    borderColor: '#757575',
+    color: '#5E5A5A',
+    borderBottomColor: '#5E5A5A',
     marginTop: 20,
     marginBottom: 20,
   },
   btn: {
-    backgroundColor: '#E53224',
-    padding: 10,
-    paddingLeft: 50,
-    paddingRight: 50,
+    backgroundColor: '#ff4757',
+    width: '100%',
+    padding: 16,
+    marginTop: 20,
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 5,
   },
   btnText: {
-    color: '#fff'
+    color: '#fff',
+    fontSize: 16
   }
 })
-
-export default connect()(NewCard)

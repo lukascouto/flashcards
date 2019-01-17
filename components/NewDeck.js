@@ -32,12 +32,12 @@ class NewDeck extends Component {
   render() {
     const { title } = this.state
     return (
-      <View>
-        <Text style={styles.container}>Qual é o título do seu novo baralho?</Text>
+      <View style={styles.container}>
+        <Text style={styles.title}>Qual será o título do seu novo baralho?</Text>
         <TextInput
           value={title}
           onChangeText={this.handleTextChange}
-          placeholder="Título do baralho"
+          placeholder="Digite aqui..."
           style={styles.input}
         />
         <TouchableOpacity
@@ -50,30 +50,41 @@ class NewDeck extends Component {
   }
 }
 
+export default connect()(NewDeck)
+
 const styles = StyleSheet.create({
   container: {
-    marginTop: 20
+    flex: 1,
+    padding: 20,
+    backgroundColor: '#111111',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  title: {
+    fontSize: 45,
+    color: '#5E5A5A'
   },
   input: {
     height: 44,
+    width: '100%',
     padding: 8,
     borderWidth: 1,
-    borderColor: '#757575',
+    color: '#5E5A5A',
+    borderBottomColor: '#5E5A5A',
     marginTop: 20,
     marginBottom: 20,
   },
   btn: {
-    backgroundColor: '#E53224',
-    padding: 10,
-    paddingLeft: 50,
-    paddingRight: 50,
+    backgroundColor: '#ff4757',
+    width: '100%',
+    padding: 16,
+    marginTop: 20,
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 5,
   },
   btnText: {
-    color: '#fff'
+    color: '#fff',
+    fontSize: 16
   }
 })
-
-export default connect()(NewDeck)

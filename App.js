@@ -1,9 +1,8 @@
 import React, { Component } from 'react'
-import { StyleSheet, View, AsyncStorage } from 'react-native'
 import Navigation from './components/Navigation'
-import NewDeck from './components/NewDeck'
+import { AsyncStorage } from 'react-native'
 
-// Novas importações para o Redux
+// Redux
 import reducer from './reducers'
 import middleware from './middleware'
 import { Provider } from 'react-redux'
@@ -24,7 +23,7 @@ const persistedReducer = persistReducer(persistConfig, reducer)
 
 class App extends Component {
   render() {
-    AsyncStorage.clear()
+    //AsyncStorage.clear()
     // Substitui o reducer pelo persistedReducer
     // persistStore e PersistGate do pacote redux-persist
     const store = createStore(persistedReducer, middleware)
@@ -40,10 +39,3 @@ class App extends Component {
 }
 
 export default App
-
-const styles = StyleSheet.create({
-  container: {
-    margin: 20
-  },
-})
-

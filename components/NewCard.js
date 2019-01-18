@@ -26,7 +26,7 @@ class NewCard extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.title}>Crie uma pergunta e uma resposta para a sua nova carta</Text>
+        <Text style={styles.title}>Crie uma pergunta e uma resposta para o seu cartão</Text>
         <TextInput
           onChangeText={(question) => this.setState({ question })}
           placeholder="Pergunta..."
@@ -42,7 +42,7 @@ class NewCard extends Component {
         <TouchableOpacity
           onPress={this.handlePress}
           style={styles.btn}>
-          <Text style={styles.btnText}>Criar</Text>
+          <Text style={styles.btnText}>Criar Cartão</Text>
         </TouchableOpacity>
       </View>
     )

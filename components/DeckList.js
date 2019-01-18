@@ -47,11 +47,11 @@ class DeckList extends Component {
                 style={styles.btnNewCard}
                 onPress={() => navigation.navigate('NewCard', { id })}
               > 
-                <Text style={{color: '#ff4757'}}>Adicionar Carta</Text>
+                <Text style={{color: '#ff4757'}}>Adicionar Cartão</Text>
               </TouchableOpacity>
               <TouchableOpacity
                 style={styles.btnStartQuiz}
-                onPress={() => navigation.navigate('CardList')}
+                onPress={() => navigation.navigate('CardList', { id })}
               >
                 <Text style={{color: 'white'}}>Iniciar Quiz</Text>
               </TouchableOpacity>
@@ -86,7 +86,7 @@ export default connect(mapStateToProps)(DeckList)
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 20,
+    padding: 15,
     backgroundColor: '#111111',
     justifyContent: 'center',
     alignItems: 'center',

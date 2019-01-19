@@ -5,35 +5,81 @@ import { connect } from 'react-redux'
 
 class CardList extends Component {
 
-  render() {
-    const { questions, navigation, id } = this.props
+    state = {
+        count: 0,
+        score: 0,
+        isAnswer: false
+    }
 
-    return (
-        <View style={styles.container}>
-           <Card item={questions[2]}/> 
-            
-            
-            <View style={styles.bottom}>
-                <Text style={{color: '#5E5A5A'}}>Já tem a resposta? Clique em 'Ver Resposta' e confira se você acertou.</Text>
-                <TouchableOpacity
-                    disabled={true}
-                    style={styles.btnNewCard}
-                    onPress={() => navigation.navigate('NewCard', { id })}
-                > 
-                    <Text style={{color: '#2ed573'}}>Correta</Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                    disabled={true}
-                    style={styles.btnStartQuiz}
-                    onPress={() => navigation.navigate('CardList', { id })}
-                >
-                    <Text style={{color: 'white'}}>Incorreta</Text>
-                </TouchableOpacity> 
+    nextQuestion = (isCorrect) => {
+
+        const { count, score } = this.state
+        const { questions } = this.props
+        
+        // Enquanto houver questão, passa para a próxima
+        // Se isCorrect, então soma mais uma resposta certa no score
+        if (count+1 < questions.length) {
+            this.setState({
+                count: count + 1,
+                score: isCorrect ? score + 1 : score
+            })
+        } else {
+            console.log('Chegou ao fim')
+        }
+        
+    }
+
+    isAnswer = (answer) => {
+        this.setState({
+            isAnswer: answer
+        })
+    }
+
+    render() {
+        const { questions, navigation, id } = this.props
+        const { count, score, isAnswer } = this.state
+        return (
+            <View style={{ flex: 1, padding: 15, backgroundColor: '#111111' }}>
+
+                <View style={ styles.status }>
+                    <Text style= { styles.statusText }>Questão: {count+1}/{questions.length} | Score: {score}</Text>
+                </View>
+
+                <View style={{ flex: 0.9 }}>
+                    <Card 
+                        item={questions[count]}
+                        onAnswer={(answer) => this.isAnswer(answer)}
+                    /> 
+                </View>
+
+                <View style={{ flex: 0.2, justifyContent: 'center', alignItems: 'center' }}>
+                {
+                    isAnswer ?
+                        <View style={styles.answer}>
+                            <View style={{justifyContent: 'center', alignItems: 'center'}}>
+                                <Text style={{ color: '#5E5A5A', fontSize: 20 }}>A sua respota está...</Text>
+                            </View>
+                            <View style={styles.buttons}>
+                                <TouchableOpacity
+                                    style={styles.btnNewCard}
+                                    onPress={() => this.nextQuestion(true)}
+                                > 
+                                    <Text style={{color: '#2ed573', fontSize: 20, fontWeight: 'bold'}}>Correta</Text>
+                                </TouchableOpacity>
+                                <TouchableOpacity
+                                    style={styles.btnStartQuiz}
+                                    onPress={() => this.nextQuestion(false)}
+                                >
+                                    <Text style={{color: '#cf000f', fontSize: 20, fontWeight: 'bold'}}>Incorreta</Text>
+                                </TouchableOpacity> 
+                            </View>
+                            
+                        </View> : null
+                }
+                </View>
             </View>
-
-        </View>
-    )
-  }
+        )
+    }
 }
 
 function mapStateToProps ({ decks }, props) {
@@ -53,37 +99,38 @@ function mapStateToProps ({ decks }, props) {
 export default connect(mapStateToProps)(CardList)
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 15,
-    backgroundColor: '#111111',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  bottom: {
-    width: '100%',
-    flex: 1,
-    justifyContent: 'flex-end',
-    alignItems: 'center',
-  },
-  btnNewCard: {
-    backgroundColor: 'transparent',
-    borderWidth: 1,
-    borderColor: '#2ed573',
-    width: '100%',
-    padding: 16,
-    marginTop: 20,
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: 5,
-  },
-  btnStartQuiz: {
-    backgroundColor: '#cf000f',
-    width: '100%',
-    padding: 16,
-    marginTop: 20,
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: 5,
-  },
+    status: {
+        flex: 0.1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        
+    },
+    statusText: {
+        color: '#ff4757',
+        fontSize: 20,
+        textTransform: 'uppercase'
+    },
+    buttons: { 
+        flexDirection: 'row',  
+    },
+    answer: { 
+        width: '100%', 
+        position: 'absolute',
+        bottom: 0
+    },
+    btnNewCard: {
+        backgroundColor: 'transparent',
+        flex: 0.5,
+        padding: 16,
+        marginTop: 20,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    btnStartQuiz: {
+        flex: 0.5,
+        padding: 16,
+        marginTop: 20,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
 })

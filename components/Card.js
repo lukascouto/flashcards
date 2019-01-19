@@ -9,6 +9,10 @@ import {
 
 class Card extends Component{
 
+    state = {
+        textLink: 'Ver resposta'
+    }
+
     componentWillMount() {
         this.animatedValue = new Animated.Value(0);
         this.value = 0;
@@ -35,51 +39,66 @@ class Card extends Component{
     
     componentWillUnmount() {
         this.animatedValue.removeAllListeners()
-        console.log('Entrou aqui')
     }
 
     flipCard() {
         if (this.value >= 90) {
+            this.setState({
+               textLink: 'Ver resposta'
+            })
+            this.props.onAnswer(false)
             Animated.spring(this.animatedValue,{
               toValue: 0,
               friction: 8,
               tension: 10
             }).start();
-          } else {
+        } else {
+            this.setState({
+                textLink: 'Voltar à pergunta'
+            })
+            this.props.onAnswer(true)
             Animated.spring(this.animatedValue,{
-              toValue: 180,
-              friction: 8,
-              tension: 10
+                toValue: 180,
+                friction: 8,
+                tension: 10
             }).start();
-        }
+    }
     }
 
     render() {
+
         const { item } = this.props
+
         const frontAnimatedStyle = {
             transform: [
               { rotateY: this.frontInterpolate }
             ]
         }
+
         const backAnimatedStyle = {
             transform: [
               { rotateY: this.backInterpolate }
             ]
         }
+
         return (
-            <View style={styles.container}>
-                <Animated.View style={[styles.flipCard, frontAnimatedStyle, {opacity: this.frontOpacity, width: '100%'}]}>
-                    <Text style={styles.flipText}>{item.question}</Text>
-                </Animated.View>
-                <Animated.View style={[styles.flipCard, styles.flipCardBack, backAnimatedStyle, {opacity: this.backOpacity, width: '100%'}]}>
-                    <Text style={styles.flipText}>{item.answer}</Text>
-                </Animated.View>  
-                <View style={{padding: 30}}>
-                    <TouchableOpacity onPress={() => this.flipCard()}>
-                        <Text style={{color: '#ff4757', fontSize: 20}}>Ver Resposta</Text>
-                    </TouchableOpacity>
+            <Fragment>
+<               View style={{ flex: 1 }}>
+                    <View style={{ flex: 0.8, justifyContent: 'center', alignItems: 'center' }}>
+                        <Animated.View style={[styles.flipCard, frontAnimatedStyle, {opacity: this.frontOpacity, width: '100%'}]}>
+                            <Text style={styles.flipText}>{item.question}</Text>
+                        </Animated.View>
+                        <Animated.View style={[styles.flipCard, styles.flipCardBack, backAnimatedStyle, {opacity: this.backOpacity, width: '100%'}]}>
+                            <Text style={styles.flipText}>{item.answer}</Text>
+                        </Animated.View> 
+                    </View>
+                    <View style={{ flex: 0.2, justifyContent: 'center', alignItems: 'center' }}>
+                        <TouchableOpacity onPress={() => this.flipCard()}>
+                            <Text style={{color: '#ff4757', fontSize: 20}}>{this.state.textLink}</Text>
+                        </TouchableOpacity>
+                    </View>
                 </View>
-            </View>
+            </Fragment>
         )
     }
 }
@@ -88,49 +107,28 @@ export default Card
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
+        flex: 0.6,
         width: '100%',
-        alignItems: 'center',
-    },
-    flipCard: {
-        //height: 250,
-        flex: 0.8,
-        alignItems: 'center',
-        borderRadius: 5,
         backgroundColor: 'white',
-        backfaceVisibility: 'hidden',
-    },
-    flipCardBack: {
+        alignItems: "center",
+        justifyContent: "center",
+      },
+    flipCard: {
         backgroundColor: '#151515',
-        position: 'absolute'
-    },
+        padding: 15,
+        borderRadius: 5,
+        backfaceVisibility: 'hidden',
+        position: "absolute",
+        top: 0,
+        height: '100%'
+      },
+    flipCardBack: {
+        backgroundColor: '#222222',
+        position: "absolute",
+        top: 0
+      },
     flipText: {
         fontSize: 20,
         color: '#5E5A5A',
     }
 })
-
-
-
-/*
-
-<Fragment>
-                <View style={styles.container}>
-                    <View>
-                        <Animated.View style={[styles.flipCard, frontAnimatedStyle]}>
-                            <Text style={styles.text}>{item.question}</Text>
-                        </Animated.View>
-                        <Animated.View style={[backAnimatedStyle, styles.flipCard, styles.flipCardBack]}>
-                            <Text style={styles.text}>{item.answer}</Text>
-                        </Animated.View>
-                    </View>
-                </View>
-                <View style={{marginTop: 30}}>
-                    <TouchableOpacity onPress={() => this.flipCard()}>
-                        <Text style={{color: '#ff4757', fontSize: 20}}>Ver resposta</Text>
-                    </TouchableOpacity>
-                </View>
-            </Fragment>
-
-
-*/

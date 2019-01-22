@@ -1,5 +1,5 @@
-import React, { Component, Fragment } from 'react'
-import { Button, Image, View, FlatList, Text, TouchableHighlight, TouchableOpacity, StyleSheet } from 'react-native'
+import React, { Component } from 'react'
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
 import Card from './Card'
 import { connect } from 'react-redux'
 
@@ -8,36 +8,86 @@ class CardList extends Component {
     state = {
         count: 0,
         score: 0,
-        isAnswer: false
+        isAnswer: false,
+        showResult: false
     }
 
     nextQuestion = (isCorrect) => {
 
         const { count, score } = this.state
-        const { questions } = this.props
+        const { questions, id } = this.props
         
         // Enquanto houver questão, passa para a próxima
         // Se isCorrect, então soma mais uma resposta certa no score
         if (count+1 < questions.length) {
             this.setState({
                 count: count + 1,
-                score: isCorrect ? score + 1 : score
+                score: isCorrect ? score + 1 : score,
             })
         } else {
-            console.log('Chegou ao fim')
+            this.setState({
+                score: isCorrect ? score + 1 : score,
+                showResult: true
+            })
         }
-        
     }
 
+    // Recebe um valor booleano para decidir se é para exibir os botões Correto e Incorreto
     isAnswer = (answer) => {
         this.setState({
             isAnswer: answer
         })
     }
 
+    // Seta todos os valores default do state e passa o id do baralho para reiniciar o quiz
+    restartQuiz = () => {
+        const { id } = this.props
+        this.setState({
+            count: 0,
+            score: 0,
+            isAnswer: false,
+            showResult: false
+        })
+        this.props.navigation.navigate('CardList', { id })
+    }
+
     render() {
         const { questions, navigation, id } = this.props
-        const { count, score, isAnswer } = this.state
+        const { count, score, isAnswer, showResult } = this.state
+
+        // Se showResult, mostrar o resultado do Quiz
+        if (showResult) {
+            return (
+                <View style={{ flex: 1, padding: 15, backgroundColor: '#111111' }}>
+
+                    <View style={{ flex: 0.8, justifyContent: 'center', alignItems: 'center' }}>  
+                        <Text style={{color: 'white'}}>Resultado</Text>
+                    </View>
+
+                    <View style={{ flex: 0.2, justifyContent: 'center', alignItems: 'center' }}>
+                        <View style={styles.buttons}>
+
+                            <TouchableOpacity
+                                style={styles.btnStartQuiz}
+                                onPress={() => this.restartQuiz()}
+                            >
+                                <Text style={{color: 'white'}}>Recomeçar Quiz</Text>
+                            </TouchableOpacity>
+
+                            <TouchableOpacity
+                                style={styles.btnNewCard}
+                                onPress={() => navigation.navigate('Home', { id })}
+                            > 
+                                <Text style={{color: '#ff4757'}}>Voltar ao baralho</Text>
+                            </TouchableOpacity>
+
+                        </View>
+                    </View>
+                    
+                </View>
+            )
+        }
+
         return (
             <View style={{ flex: 1, padding: 15, backgroundColor: '#111111' }}>
 

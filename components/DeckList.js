@@ -47,13 +47,13 @@ class DeckList extends Component {
                 style={styles.btnNewCard}
                 onPress={() => navigation.navigate('NewCard', { id })}
               > 
-                <Text style={{color: '#ff4757'}}>Adicionar Cartão</Text>
+                <Text style={{ color: '#ff4757' }}>Adicionar Cartão</Text>
               </TouchableOpacity>
               <TouchableOpacity
                 style={styles.btnStartQuiz}
                 onPress={() => navigation.navigate('CardList', { id })}
               >
-                <Text style={{color: 'white'}}>Iniciar Quiz</Text>
+                <Text style={{ color: 'white' }}>Iniciar Quiz</Text>
               </TouchableOpacity>
             </Fragment>
           : 

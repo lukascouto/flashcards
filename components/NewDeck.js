@@ -23,11 +23,12 @@ class NewDeck extends Component {
     this.props.dispatch(addDeck({
       id,
       title,
-      questions: []
+      questions: [],
+      checked: false
     }))
     // Navega até a página principal passando o id do último cadastro
     // O id é usado no filtro da Home para exibir apenas o último baralho
-    this.props.navigation.navigate('Home', { id })
+    this.props.navigation.navigate('Deck', { id })
   }
   render() {
     const { title } = this.state

@@ -17,6 +17,18 @@ const AppNavigator = createStackNavigator({
       },
     },
   },
+  Deck: {
+    screen: DeckList,
+    navigationOptions: {
+      title: "Deck",
+      headerTintColor: 'white',
+      headerStyle: {
+        borderBottomWidth: 0,
+        shadowColor: 'transparent',
+        backgroundColor: '#222121',
+      },
+    },
+  },
   New: {
     screen: NewDeck,
     navigationOptions: {

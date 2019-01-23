@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Navigation from './components/Navigation'
 import { AsyncStorage } from 'react-native'
+import { setLocalNotification } from './utils/helpers'
 
 // Redux
 import reducer from './reducers'
@@ -22,6 +23,11 @@ const persistedReducer = persistReducer(persistConfig, reducer)
 // Fim Redux Persist
 
 class App extends Component {
+
+  componentDidMount() {
+    setLocalNotification()
+  }
+
   render() {
     //AsyncStorage.clear()
     // Substitui o reducer pelo persistedReducer

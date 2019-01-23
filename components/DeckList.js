@@ -14,8 +14,16 @@ class DeckList extends Component {
     </TouchableHighlight> 
   )
 
+  startQuiz = () => {
+    const { decks, navigation, id } = this.props
+    decks[0].questions.length === 0 ? 
+      alert('Adicione pelo menos um cartão para iniciar um Quiz.')
+      : navigation.navigate('CardList', { id })
+  }
+
   render() {
     const { decks, navigation, id } = this.props
+    
     if (decks.length === 0) {
       return (
         <View style={styles.container}>
@@ -43,18 +51,21 @@ class DeckList extends Component {
           // Caso contrário, está na home, então retorna o botão de adicionar baralho
           id !== undefined ?
             <Fragment>
+
               <TouchableOpacity
                 style={styles.btnNewCard}
                 onPress={() => navigation.navigate('NewCard', { id })}
               > 
                 <Text style={{ color: '#ff4757' }}>Adicionar Cartão</Text>
               </TouchableOpacity>
+
               <TouchableOpacity
                 style={styles.btnStartQuiz}
-                onPress={() => navigation.navigate('CardList', { id })}
+                onPress={() => this.startQuiz()}
               >
                 <Text style={{ color: 'white' }}>Iniciar Quiz</Text>
               </TouchableOpacity>
+
             </Fragment>
           : 
           <ActionButton

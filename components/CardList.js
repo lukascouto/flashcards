@@ -27,7 +27,7 @@ class CardList extends Component {
         } else {
             this.setState({
                 score: isCorrect ? score + 1 : score,
-                showResult: true
+                showResult: true,
             })
         }
     }
@@ -61,29 +61,27 @@ class CardList extends Component {
                 <View style={{ flex: 1, padding: 15, backgroundColor: '#111111' }}>
 
                     <View style={{ flex: 0.8, justifyContent: 'center', alignItems: 'center' }}>  
-                        <Text style={{color: 'white'}}>Resultado</Text>
+                        <Text style={{color: '#5E5A5A', fontSize: 26}}>Resultado</Text>
+                        <Text style={{color: '#5E5A5A', fontSize: 20, marginTop: 20}}>Você acertou {score} de {questions.length} questões</Text>
                     </View>
 
                     <View style={{ flex: 0.2, justifyContent: 'center', alignItems: 'center' }}>
-                        <View style={styles.buttons}>
+                        <TouchableOpacity
+                            style={styles.btnRestartQuiz}
+                            onPress={() => this.restartQuiz()}
+                        >
+                            <Text style={{color: '#ff4757'}}>Recomeçar Quiz</Text>
+                        </TouchableOpacity>
 
-                            <TouchableOpacity
-                                style={styles.btnStartQuiz}
-                                onPress={() => this.restartQuiz()}
-                            >
-                                <Text style={{color: 'white'}}>Recomeçar Quiz</Text>
-                            </TouchableOpacity>
+                        <TouchableOpacity
+                            style={styles.btnBackToDeck}
+                            onPress={() => navigation.navigate('Home', { id })}
+                        > 
+                            <Text style={{color: 'white'}}>Voltar ao baralho</Text>
+                        </TouchableOpacity>
 
-                            <TouchableOpacity
-                                style={styles.btnNewCard}
-                                onPress={() => navigation.navigate('Home', { id })}
-                            > 
-                                <Text style={{color: '#ff4757'}}>Voltar ao baralho</Text>
-                            </TouchableOpacity>
-
-                        </View>
                     </View>
-                    
+
                 </View>
             )
         }
@@ -101,7 +99,7 @@ class CardList extends Component {
                         onAnswer={(answer) => this.isAnswer(answer)}
                     /> 
                 </View>
-
+                
                 <View style={{ flex: 0.2, justifyContent: 'center', alignItems: 'center' }}>
                 {
                     isAnswer ?
@@ -183,4 +181,25 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
     },
+
+    btnRestartQuiz: {
+        backgroundColor: 'transparent',
+        borderWidth: 1,
+        borderColor: '#ff4757',
+        width: '100%',
+        padding: 16,
+        marginTop: 20,
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: 5,
+      },
+      btnBackToDeck: {
+        backgroundColor: '#ff4757',
+        width: '100%',
+        padding: 16,
+        marginTop: 20,
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: 5,
+      },
 })

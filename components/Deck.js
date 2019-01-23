@@ -10,10 +10,10 @@ class Deck extends Component{
     const { item } = this.props
     return (
       <View style={{flex: 1, flexDirection: 'row'}}>
-        <View style={styles.checked} />
+        <View style={item.checked === false ? styles.unchecked : styles.checked} />
         <View style={styles.container}>
           <Text style={styles.title}>{item.title}</Text>
-          <Text style={styles.cards}>{item.questions.length}</Text>
+          <Text style={styles.cards}>{item.questions.length} {item.questions.length === 1 ? 'CARTÃO' : 'CARTÕES'}</Text>
         </View>
       </View>
     )
@@ -34,6 +34,11 @@ const styles = StyleSheet.create({
     width: '2%',
     marginBottom: 10,
     backgroundColor: '#2ed573',
+  },
+  unchecked: {
+    width: '2%',
+    marginBottom: 10,
+    backgroundColor: '#5E5A5A',
   },
   title: {
     marginTop: 0,

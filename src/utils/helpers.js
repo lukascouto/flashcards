@@ -11,8 +11,8 @@ export const clearLocalNotification = async () => {
 
 function createNotification() {
   return {
-    title: `It's time to study!`,
-    body: "👋 don't forget to study today!",
+    title: `Vamos estudar!`,
+    body: "👋 não esqueça de estudar hoje!",
     ios: {
       sound: true
     },
@@ -50,25 +50,6 @@ export const setLocalNotification = async () => {
     }
   }
 }
-
-export const getIsLocalNotificationSet = async () => {
-  const data = await AsyncStorage.getItem(NOTIFICATION_KEY)
-  const isNotificationSet = JSON.parse(data)
-
-  return isNotificationSet
-}
-
-
-export function formatDate(timestamp) {
-    var monthName = ['jan', 'fev', 'mar', 'abr', 'mai', 'jun', 'jul', 'ago', 'set', 'out', 'nov', 'dez']
-    var data = new Date(timestamp);
-    var day = data.getDate();
-    var month = data.getMonth();
-    month = monthName[month];
-    var year = data.getFullYear();
-    return [day, month, year].join(' ');
-}
-
 
 export function generateID () {
   return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)

@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
-import Navigation from './components/Navigation'
+import Navigation from './src/components/Navigation'
 import { AsyncStorage } from 'react-native'
-import { setLocalNotification } from './utils/helpers'
+import { setLocalNotification } from './src/utils/helpers'
 
 // Redux
-import reducer from './reducers'
-import middleware from './middleware'
+import reducer from './src/reducers'
+import middleware from './src/middleware'
 import { Provider } from 'react-redux'
 import { createStore } from 'redux'
 

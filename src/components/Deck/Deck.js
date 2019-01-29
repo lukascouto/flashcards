@@ -9,8 +9,7 @@ class Deck extends Component{
   render() {
     const { item } = this.props
     return (
-      <View style={{flex: 1, flexDirection: 'row'}}>
-        <View style={item.checked === false ? styles.unchecked : styles.checked} />
+      <View style={{ flex: 1, flexDirection: 'row' }}>
         <View style={styles.container}>
           <Text style={styles.title}>{item.title}</Text>
           <Text style={styles.cards}>{item.questions.length} {item.questions.length === 1 ? 'CARTÃO' : 'CARTÕES'}</Text>
@@ -24,31 +23,30 @@ export default Deck
 
 const styles = StyleSheet.create({
   container: {
-    width: '98%',
-    padding: 20,
+    width: '100%',
+    padding: 40,
     marginBottom: 10,
-    backgroundColor: '#151515',
+    backgroundColor: '#FFF',
     borderRadius: 5,
-  },
-  checked: {
-    width: '2%',
-    marginBottom: 10,
-    backgroundColor: '#2ed573',
-  },
-  unchecked: {
-    width: '2%',
-    marginBottom: 10,
-    backgroundColor: '#5E5A5A',
+    shadowColor: "#000",
+    shadowOffset: {
+    	width: 0,
+    	height: 1,
+    },
+    shadowOpacity: 0.18,
+    shadowRadius: 1.00,
+
+    elevation: 1,
   },
   title: {
     marginTop: 0,
-    fontSize: 40,
+    fontSize: 26,
     color: '#5E5A5A'
   },
   cards: {
     marginTop: 8,
     marginBottom: 8,
     fontSize: 20,
-    color: '#5E5A5A'
+    color: '#5E5A5A',
   }
 })

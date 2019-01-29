@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { View, Text, TextInput, StyleSheet, TouchableOpacity } from 'react-native'
-import { addCard } from '../actions/decks'
+import { addCard } from '../../actions/decks'
 import { connect } from 'react-redux'
-import { generateID } from '../utils/helpers'
+import { generateID } from '../../utils/helpers'
 
 class NewCard extends Component {
   state = {
@@ -18,10 +18,13 @@ class NewCard extends Component {
     const { question, answer } = this.state
     const { navigation } = this.props
     const deckID = navigation.getParam('id')
-    //const id = generateID()
 
-    this.props.dispatch(addCard(deckID, { question, answer }))
-    this.props.navigation.goBack()
+    if (question === '' || answer === '') {
+      alert('Todos os campos precisam ser preenchidos.')
+    } else {
+      this.props.dispatch(addCard(deckID, { question, answer }))
+      this.props.navigation.goBack()
+    }
   }
   render() {
     return (
@@ -30,13 +33,13 @@ class NewCard extends Component {
         <TextInput
           onChangeText={(question) => this.setState({ question })}
           placeholder="Pergunta..."
-          placeholderTextColor="#5E5A5A" 
+          placeholderTextColor="#5E5A5A"
           style={styles.input}
         />
         <TextInput
           onChangeText={(answer) => this.setState({ answer })}
           placeholder="Resposta..."
-          placeholderTextColor="#5E5A5A" 
+          placeholderTextColor="#5E5A5A"
           style={styles.input}
         />
         <TouchableOpacity
@@ -54,14 +57,15 @@ export default connect()(NewCard)
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 20,
-    backgroundColor: '#111111',
+    padding: 15,
+    backgroundColor: '#F1F1F1',
     justifyContent: 'center',
     alignItems: 'center',
   },
   title: {
-    fontSize: 45,
-    color: '#5E5A5A'
+    fontSize: 20,
+    color: '#5E5A5A',
+    marginBottom: 40,
   },
   input: {
     height: 44,
@@ -69,9 +73,9 @@ const styles = StyleSheet.create({
     padding: 8,
     borderWidth: 1,
     color: '#5E5A5A',
+    borderColor: 'transparent',
     borderBottomColor: '#5E5A5A',
-    marginTop: 20,
-    marginBottom: 20,
+    marginBottom: 30
   },
   btn: {
     backgroundColor: '#ff4757',

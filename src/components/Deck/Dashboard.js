@@ -3,6 +3,9 @@ import { Button, Image, View, FlatList, Text, TouchableHighlight, TouchableOpaci
 import Deck from './Deck'
 import { connect } from 'react-redux'
 import ActionButton from 'react-native-action-button'
+import ButtonSolid from '../Buttons/ButtonSolid'
+import ButtonOutline from '../Buttons/ButtonOutline'
+import { clearLocalNotification } from '../../utils/helpers'
 
 class DeckList extends Component {
 
@@ -11,30 +14,27 @@ class DeckList extends Component {
       onPress={() => this.props.navigation.push('Home', { id: item.id })}
     >
       <Deck item={item}/>
-    </TouchableHighlight> 
+    </TouchableHighlight>
   )
 
   startQuiz = () => {
     const { decks, navigation, id } = this.props
-    decks[0].questions.length === 0 ? 
+    decks[0].questions.length === 0 ?
       alert('Adicione pelo menos um cartão para iniciar um Quiz.')
-      : navigation.navigate('CardList', { id })
+      : navigation.navigate('CardList', { id }) &&
+        clearLocalNotification()
   }
 
   render() {
     const { decks, navigation, id } = this.props
-    
+
     if (decks.length === 0) {
       return (
         <View style={styles.container}>
-          <Image
-            style={styles.image}
-            source={require('../assets/no-decks-image.png')}
-          />
-          <Text style={{fontSize: 40, color: '#5E5A5A', marginTop: 40}}>Crie o seu primeiro baralho.</Text>
+          <Text style={{ color: '#5E5A5A' }}>Você ainda não possui baralhos</Text>
           <ActionButton
             buttonColor="#ff4757"
-            onPress={() => navigation.navigate('New')}
+            onPress={() => navigation.navigate('NewDeck')}
           />
         </View>
       )
@@ -51,26 +51,17 @@ class DeckList extends Component {
           // Caso contrário, está na home, então retorna o botão de adicionar baralho
           id !== undefined ?
             <Fragment>
-
-              <TouchableOpacity
-                style={styles.btnNewCard}
-                onPress={() => navigation.navigate('NewCard', { id })}
-              > 
-                <Text style={{ color: '#ff4757' }}>Adicionar Cartão</Text>
-              </TouchableOpacity>
-
-              <TouchableOpacity
-                style={styles.btnStartQuiz}
-                onPress={() => this.startQuiz()}
-              >
-                <Text style={{ color: 'white' }}>Iniciar Quiz</Text>
-              </TouchableOpacity>
-
+              <ButtonOutline onPress={() => navigation.navigate('NewCard', { id })}>
+                Adicionar Cartão
+              </ButtonOutline>
+              <ButtonSolid onPress={() => this.startQuiz()}>
+                Iniciar Quiz
+              </ButtonSolid>
             </Fragment>
-          : 
+          :
           <ActionButton
             buttonColor="#ff4757"
-            onPress={() => navigation.navigate('New')}
+            onPress={() => navigation.navigate('NewDeck')}
           />
         }
       </View>
@@ -83,7 +74,7 @@ function mapStateToProps ({ decks }, props) {
   // Transforma os objetos decks em array
   const id = props.navigation.getParam('id')
   const decksArray = Object.values(decks)
-  
+
   // Se houver um id, retorna apenas o deck criado/clicado
   // Caso contrário, retorna todos os decks existentes (Está na página principal)
   return {
@@ -98,32 +89,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 15,
-    backgroundColor: '#111111',
+    backgroundColor: '#F1F1F1',
     justifyContent: 'center',
     alignItems: 'center',
-  },
-  image : {
-    width: 290,
-    height: 256,
-  },
-  btnNewCard: {
-    backgroundColor: 'transparent',
-    borderWidth: 1,
-    borderColor: '#ff4757',
-    width: '100%',
-    padding: 16,
-    marginTop: 20,
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: 5,
-  },
-  btnStartQuiz: {
-    backgroundColor: '#ff4757',
-    width: '100%',
-    padding: 16,
-    marginTop: 20,
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: 5,
-  },
+  }
 })

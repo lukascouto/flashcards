@@ -1,5 +1,12 @@
 import React, { Component } from 'react'
-import { View, Text, TextInput, StyleSheet, TouchableOpacity } from 'react-native'
+import {
+  View,
+  Text,
+  TextInput,
+  StyleSheet,
+  TouchableOpacity,
+  KeyboardAvoidingView 
+} from 'react-native'
 import { addCard } from '../../actions/decks'
 import { connect } from 'react-redux'
 import { generateID } from '../../utils/helpers'
@@ -28,7 +35,7 @@ class NewCard extends Component {
   }
   render() {
     return (
-      <View style={styles.container}>
+      <KeyboardAvoidingView behavior='padding'  style={styles.container}>
         <Text style={styles.title}>Crie uma pergunta e uma resposta para o seu cartão</Text>
         <TextInput
           onChangeText={(question) => this.setState({ question })}
@@ -47,7 +54,7 @@ class NewCard extends Component {
           style={styles.btn}>
           <Text style={styles.btnText}>Criar Cartão</Text>
         </TouchableOpacity>
-      </View>
+      </KeyboardAvoidingView>
     )
   }
 }

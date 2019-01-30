@@ -1,5 +1,13 @@
 import React, { Component } from 'react'
-import { View, Text, TextInput, StyleSheet, TouchableOpacity, AsyncStorage } from 'react-native'
+import {
+  View,
+  Text,
+  TextInput,
+  StyleSheet,
+  TouchableOpacity,
+  AsyncStorage,
+  KeyboardAvoidingView
+} from 'react-native'
 import ButtonSolid from '../Buttons/ButtonSolid'
 import { addDeck } from '../../actions/decks'
 import { connect } from 'react-redux'
@@ -38,7 +46,7 @@ class NewDeck extends Component {
     const { title } = this.state
 
     return (
-      <View style={styles.container}>
+      <KeyboardAvoidingView behavior='padding' style={styles.container}>
         <Text style={styles.title}>Qual será o título do seu novo baralho?</Text>
         <TextInput
           value={title}
@@ -49,7 +57,7 @@ class NewDeck extends Component {
         <ButtonSolid onPress={this.handlePress}>
           Criar baralho
         </ButtonSolid>
-      </View>
+      </KeyboardAvoidingView>
     )
   }
 }

@@ -11,7 +11,7 @@ class DeckList extends Component {
 
   renderItem = ({item}) => (
     <TouchableHighlight
-      onPress={() => this.props.navigation.push('Home', { id: item.id })}
+      onPress={() => this.props.navigation.push('Deck', { id: item.id })}
     >
       <Deck item={item}/>
     </TouchableHighlight>
@@ -39,6 +39,7 @@ class DeckList extends Component {
         </View>
       )
     }
+
     return (
       <View style={styles.container}>
         <FlatList

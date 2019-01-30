@@ -7,7 +7,7 @@ export default function ButtonSolid ({ children, onPress }) {
       onPress={onPress}
       style={styles.btn}
     >
-      <Text style={{ color: '#fff' }}>{children}</Text>
+      <Text style={{ color: '#fff', fontSize: 16 }}>{children}</Text>
     </TouchableOpacity>
   )
 }

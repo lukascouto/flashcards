@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Navigation from './src/components/Navigation'
+import Navigation from './src/routes/Navigation'
 import { AsyncStorage } from 'react-native'
 import { setLocalNotification } from './src/utils/helpers'
 

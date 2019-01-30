@@ -7,7 +7,7 @@ export default function ButtonOutline ({ children, onPress }) {
       onPress={onPress}
       style={styles.btn}
     >
-      <Text style={{ color: '#ff4757' }}>{children}</Text>
+      <Text style={{ color: '#ff4757', fontSize: 16 }}>{children}</Text>
     </TouchableOpacity>
   )
 }

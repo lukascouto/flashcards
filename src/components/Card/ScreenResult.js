@@ -10,27 +10,20 @@ export default function ScreenResult({ score, questions, navigation, id, onResta
   return (
     <View style={ styles.container }>
       <View style={ styles.result }>
-
         <View style={{ justifyContent: 'center', alignItems: 'center' }}>
-          <Text style={{ position: 'absolute', fontSize: 75 }}>
+          <Text style={{ position: 'absolute', fontSize: 60, color: '#5E5A5A' }}>
             {percent}%
           </Text>
           <VictoryPie
             labels={() => null} // remove os textos de x
             innerRadius={100} // deixa o círculo vazado
-            colorScale={["#EA2027", "#27ae60"]} // seta as cores vermelha e verde
+            colorScale={["#EBEBEB", "#2ed573"]} // seta as cores cinza e verde
             data={[
               { x: '', y: questions.length - score }, // erradas
               { x: '', y: score }, // certas
             ]}
-            animate={{
-              onLoad: {
-                duration: 1000,
-              }
-            }}
           />
         </View>
-
        <Text style={ styles.subtitle }>
          Você acertou {score} de {questions.length} questões
        </Text>
@@ -39,7 +32,7 @@ export default function ScreenResult({ score, questions, navigation, id, onResta
         <ButtonOutline onPress={() => onRestartQuiz()}>
           Recomeçar Quiz
         </ButtonOutline>
-        <ButtonSolid onPress={() => navigation.navigate('Home', { id })}>
+        <ButtonSolid onPress={() => navigation.goBack()}>
           Voltar ao baralho
         </ButtonSolid>
       </View>

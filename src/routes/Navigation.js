@@ -1,8 +1,8 @@
-import { createStackNavigator, createAppContainer } from 'react-navigation';
-import DeckList from './Deck/Dashboard'
-import NewDeck from './Deck/NewDeck'
-import NewCard from './Card/NewCard'
-import CardList from './Card/Dashboard'
+import { createStackNavigator, createAppContainer } from 'react-navigation'
+import DeckList from '../components/Deck/Dashboard'
+import NewDeck from '../components/Deck/NewDeck'
+import NewCard from '../components/Card/NewCard'
+import CardList from '../components/Card/Dashboard'
 
 const AppNavigator = createStackNavigator({
   Home: {
@@ -18,7 +18,7 @@ const AppNavigator = createStackNavigator({
   Deck: {
     screen: DeckList,
     navigationOptions: {
-      title: "Deck",
+      title: "Baralho",
       headerStyle: {
         borderBottomWidth: 0,
         shadowColor: 'transparent',
@@ -48,7 +48,7 @@ const AppNavigator = createStackNavigator({
   CardList: {
     screen: CardList,
     navigationOptions: {
-      title: "Quiz",
+      title: `Quiz`,
       headerStyle: {
         borderBottomWidth: 0,
         shadowColor: 'transparent',

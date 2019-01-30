@@ -58,8 +58,9 @@ class CardList extends Component {
     return (
       <View style={ styles.container }>
         <View style={ styles.status }>
+          <Text style={ styles.statusText }>{count+1}/{questions.length}</Text>
           <Text style={ styles.statusText }>
-            Questão: {count+1}/{questions.length} | Score: {score}
+            Toque na questão para ver a resposta
           </Text>
         </View>
         <View style={{ flex: 0.9 }}>
@@ -102,8 +103,8 @@ const styles = StyleSheet.create({
 
   },
   statusText: {
-    color: '#ff4757',
-    fontSize: 20,
-    textTransform: 'uppercase'
+    color: '#5E5A5A',
+    fontSize: 16,
+    fontWeight: 'bold'
   },
 })

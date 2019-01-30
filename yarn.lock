@@ -4577,6 +4577,11 @@ react-native-branch@2.2.5:
   resolved "https://registry.yarnpkg.com/react-native-branch/-/react-native-branch-2.2.5.tgz#4074dd63b4973e6397d9ce50e97b57c77a518e9d"
   integrity sha1-QHTdY7SXPmOX2c5Q6XtXx3pRjp0=
 
+react-native-flip-view@^1.0.5:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/react-native-flip-view/-/react-native-flip-view-1.0.5.tgz#6f18ac4da021d0672c8531676c8cb08ef4f36915"
+  integrity sha1-bxisTaAh0GcshTFnbIywjvTzaRU=
+
 react-native-floating-action@^1.13.0:
   version "1.13.0"
   resolved "https://registry.yarnpkg.com/react-native-floating-action/-/react-native-floating-action-1.13.0.tgz#876ab9227c4eda8630020a6a3adc20041870edf3"
@@ -4623,13 +4628,6 @@ react-native-screens@1.0.0-alpha.19:
   version "1.0.0-alpha.22"
   resolved "https://registry.yarnpkg.com/react-native-screens/-/react-native-screens-1.0.0-alpha.22.tgz#7a120377b52aa9bbb94d0b8541a014026be9289b"
   integrity sha512-kSyAt0AeVU6N7ZonfV6dP6iZF8B7Bce+tk3eujXhzBGsLg0VSLnU7uE9VqJF0xdQrHR91ZjGgVMieo/8df9KTA==
-
-react-native-speedometer-chart@^0.6.4:
-  version "0.6.4"
-  resolved "https://registry.yarnpkg.com/react-native-speedometer-chart/-/react-native-speedometer-chart-0.6.4.tgz#006a627ecb496a322771e999429e48375bac2657"
-  integrity sha512-Jr/QqRHMFciisa6QVuCml9CCT+stMZSp+/Rv2I1cA66Jiv7xslguT6iFQWVeTLhxLk6IJ8Klh12yiiI+A7fXEQ==
-  dependencies:
-    prop-types "^15.5.10"
 
 react-native-svg@8.0.10:
   version "8.0.10"
